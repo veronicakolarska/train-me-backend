@@ -1,0 +1,22 @@
+{
+  "name": "init_package",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \\\"Error: no test specified\\\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/veronicakolarska/train-me-backend.git"
+  },
+  "author": "Veronica Kolarska",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/veronicakolarska/train-me-backend/issues"
+  },
+  "homepage": "https://github.com/veronicakolarska/train-me-backend#readme",
+  "devDependencies": {
+    "husky": "^4.2.3"
+  }
+}
