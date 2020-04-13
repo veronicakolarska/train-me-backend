@@ -4,8 +4,6 @@ root = true
 # all files
 [*]
 
-#### Core EditorConfig Options ####
-
 # Indentation and spacing
 indent_size = 4
 indent_style = space
