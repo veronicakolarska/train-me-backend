@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TrainMe.Data.Models\TrainMe.Data.Models.csproj" />
+    <ProjectReference Include="..\TrainMe.Data.Common\TrainMe.Data.Common.csproj" />
   </ItemGroup>
 
 </Project>

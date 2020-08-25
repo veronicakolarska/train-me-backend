@@ -6,6 +6,7 @@
     using Microsoft.EntityFrameworkCore;
     using TrainMe.Data.Models;
     using System.Linq;
+    using TrainMe.Data.Common.Models;
 
     public class TrainMeContext : DbContext
     {

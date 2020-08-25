@@ -4,6 +4,7 @@ namespace TrainMe.Data.Models
     using TrainMe.Common;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using TrainMe.Data.Common.Models;
 
     public class Program : AuditableEntity
     {

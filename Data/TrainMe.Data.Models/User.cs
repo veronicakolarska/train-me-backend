@@ -1,9 +1,9 @@
 ﻿namespace TrainMe.Data.Models
 {
-    using System;
     using TrainMe.Common;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using TrainMe.Data.Common.Models;
 
     public class User : AuditableEntity
     {
