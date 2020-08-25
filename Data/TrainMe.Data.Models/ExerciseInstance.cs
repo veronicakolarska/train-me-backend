@@ -1,7 +1,9 @@
 namespace TrainMe.Data.Models
 {
     using System;
+    using TrainMe.Common;
     using System.ComponentModel.DataAnnotations;
+
 
     public class ExerciseInstance
     {
@@ -13,17 +15,17 @@ namespace TrainMe.Data.Models
         public Exercise Exercise { get; set; }
 
         [Required]
-        [Range(1, 10)]
+        [Range(GlobalConstants.ExerciseSeriesMin, GlobalConstants.ExerciseSeriesMax)]
         public int Series { get; set; }
 
         [Required]
-        [Range(1, 30)]
+        [Range(GlobalConstants.ExerciseRepetitionsMin, GlobalConstants.ExerciseRepetitionsMax)]
         public int Repetitions { get; set; }
 
-        [StringLength(0, MinimumLength = 20)]
+        [StringLength(GlobalConstants.ExerciseTempoMaxLength, MinimumLength = GlobalConstants.ExerciseTempoMinLength)]
         public string Tempo { get; set; }
 
-        [Range(0, 120)]
+        [Range(GlobalConstants.ExerciseBreakMin, GlobalConstants.ExerciseBreakMax)]
         public int Break { get; set; }
     }
 }

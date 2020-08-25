@@ -1,6 +1,7 @@
 namespace TrainMe.Data.Models
 {
     using System;
+    using TrainMe.Common;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
@@ -16,10 +17,10 @@ namespace TrainMe.Data.Models
         public int Id { get; set; }
 
         [Required]
-        [StringLength(40, MinimumLength = 3)]
+        [StringLength(GlobalConstants.ProgramNameMaxLength, MinimumLength = GlobalConstants.ProgramNameMinLength)]
         public string Name { get; set; }
 
-        [StringLength(250)]
+        [StringLength(GlobalConstants.ProgramDescriptionMaxLength)]
         public string Description { get; set; }
 
         public int CreatorId { get; set; }

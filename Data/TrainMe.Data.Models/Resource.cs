@@ -1,7 +1,7 @@
 namespace TrainMe.Data.Models
 {
     using System;
-    using System.Collections.Generic;
+    using TrainMe.Common;
     using System.ComponentModel.DataAnnotations;
 
     public class Resource
@@ -10,13 +10,13 @@ namespace TrainMe.Data.Models
         public int Id { get; set; }
 
         [Required]
-        [StringLength(40, MinimumLength = 3)]
+        [StringLength(GlobalConstants.ResourceNameMaxLength, MinimumLength = GlobalConstants.ResourceNameMinLength)]
         public string Name { get; set; }
 
         [Required]
         public ResourceType Type { get; set; }
 
-        [StringLength(250)]
+        [StringLength(GlobalConstants.ResourceDescriptionMaxLength)]
         public string Description { get; set; }
     }
 }

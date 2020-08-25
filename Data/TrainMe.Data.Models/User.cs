@@ -1,6 +1,7 @@
 ﻿namespace TrainMe.Data.Models
 {
     using System;
+    using TrainMe.Common;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
@@ -15,22 +16,22 @@
         public int Id { get; set; }
 
         [Required]
-        [StringLength(20, MinimumLength = 3)]
+        [StringLength(GlobalConstants.UserNameMaxLength, MinimumLength = GlobalConstants.UserNameMinLength)]
         public string FirstName { get; set; }
 
         [Required]
-        [StringLength(20, MinimumLength = 3)]
+        [StringLength(GlobalConstants.UserNameMaxLength, MinimumLength = GlobalConstants.UserNameMinLength)]
         public string LastName { get; set; }
 
         [Required]
-        [StringLength(40, MinimumLength = 3)]
+        [StringLength(GlobalConstants.UserEmailMaxLength, MinimumLength = GlobalConstants.UserEmailMinLength)]
         public string Email { get; set; }
 
         [Required]
-        [StringLength(128, MinimumLength = 8)]
+        [StringLength(GlobalConstants.UserPasswordMaxLength, MinimumLength = GlobalConstants.UserPasswordMinLength)]
         public string Password { get; set; }
 
-        [Range(16, 99)]
+        [Range(GlobalConstants.UserMinAge, GlobalConstants.UserMaxAge)]
         public int Age { get; set; }
 
         public Gender Gender { get; set; }

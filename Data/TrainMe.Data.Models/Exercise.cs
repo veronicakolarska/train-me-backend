@@ -3,6 +3,7 @@ namespace TrainMe.Data.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using TrainMe.Common;
 
     public class Exercise
     {
@@ -15,21 +16,21 @@ namespace TrainMe.Data.Models
         public int Id { get; set; }
 
         [Required]
-        [StringLength(40, MinimumLength = 3)]
+        [StringLength(GlobalConstants.ExerciseNameMaxLength, MinimumLength = GlobalConstants.ExerciseNameMinLength)]
         public string Name { get; set; }
 
         [Required]
-        [Range(1, 10)]
+        [Range(GlobalConstants.ExerciseSeriesMin, GlobalConstants.ExerciseSeriesMax)]
         public int SeriesDefault { get; set; }
 
         [Required]
-        [Range(1, 30)]
+        [Range(GlobalConstants.ExerciseRepetitionsMin, GlobalConstants.ExerciseRepetitionsMax)]
         public int RepetitionsDefault { get; set; }
 
-        [StringLength(0, MinimumLength = 20)]
+        [StringLength(GlobalConstants.ExerciseTempoMaxLength, MinimumLength = GlobalConstants.ExerciseTempoMinLength)]
         public string TempoDefault { get; set; }
 
-        [Range(0, 120)]
+        [Range(GlobalConstants.ExerciseBreakMin, GlobalConstants.ExerciseBreakMax)]
         public int BreakDefault { get; set; }
 
         public ICollection<Resource> Resources { get; set; }
