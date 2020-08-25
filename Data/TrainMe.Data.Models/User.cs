@@ -6,6 +6,11 @@
 
     public class User
     {
+        public User()
+        {
+            this.ProgramInstances = new HashSet<ProgramInstance>();
+        }
+
         [Key]
         public int Id { get; set; }
 
@@ -18,7 +23,7 @@
         public string LastName { get; set; }
 
         [Required]
-        [StringLength(40, MinimumLength = 8)]
+        [StringLength(40, MinimumLength = 3)]
         public string Email { get; set; }
 
         [Required]
@@ -28,7 +33,7 @@
         [Range(16, 99)]
         public int Age { get; set; }
 
-        public Sex Sex { get; set; }
+        public Gender Gender { get; set; }
 
         public ICollection<ProgramInstance> ProgramInstances { get; set; }
     }

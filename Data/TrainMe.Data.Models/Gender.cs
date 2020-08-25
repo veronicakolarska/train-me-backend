@@ -1,6 +1,6 @@
 namespace TrainMe.Data.Models
 {
-    public enum Sex
+    public enum Gender
     {
         Male = 1,
 
