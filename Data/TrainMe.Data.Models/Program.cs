@@ -5,7 +5,7 @@ namespace TrainMe.Data.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public class Program
+    public class Program : AuditableEntity
     {
         public Program()
         {

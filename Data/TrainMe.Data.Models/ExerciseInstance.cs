@@ -1,11 +1,12 @@
 namespace TrainMe.Data.Models
 {
     using System;
+    using System.Collections.Generic;
     using TrainMe.Common;
     using System.ComponentModel.DataAnnotations;
 
 
-    public class ExerciseInstance
+    public class ExerciseInstance : AuditableEntity
     {
         [Key]
         public int Id { get; set; }

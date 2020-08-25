@@ -8,6 +8,7 @@ namespace TrainMe.Data
     {
         public void Configure(EntityTypeBuilder<Exercise> builder)
         {
+
         }
     }
 }
