@@ -24,12 +24,13 @@
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            // TODO: Extract this in an appsettings.json in the webapi project
             optionsBuilder.UseSqlServer(@"Server=.;Database=TrainMe;User Id=sa;Password=123456!!XX;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            base.OnModelCreating(modelBuilder);
         }
 
         public override int SaveChanges() => this.SaveChanges(true);
