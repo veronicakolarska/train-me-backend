@@ -22,6 +22,9 @@ namespace TrainMe.Data.Models
         [Required]
         public ResourceType Type { get; set; }
 
+        [Required]
+        public string Link { get; set; }
+
         [StringLength(GlobalConstants.ResourceDescriptionMaxLength)]
         public string Description { get; set; }
 
