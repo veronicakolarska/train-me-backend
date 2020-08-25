@@ -16,4 +16,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TrainMe.Data.Models\TrainMe.Data.Models.csproj" />
+  </ItemGroup>
+
 </Project>
