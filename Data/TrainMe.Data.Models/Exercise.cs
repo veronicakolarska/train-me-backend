@@ -6,14 +6,17 @@ namespace TrainMe.Data.Models
 
     public class Exercise
     {
+        public Exercise()
+        {
+            this.Resources = new HashSet<Resource>();
+        }
+
         [Key]
         public int Id { get; set; }
 
         [Required]
         [StringLength(40, MinimumLength = 3)]
         public string Name { get; set; }
-
-        public ICollection<Resource> Resources { get; set; }
 
         [Required]
         [Range(1, 10)]
@@ -28,5 +31,7 @@ namespace TrainMe.Data.Models
 
         [Range(0, 120)]
         public int BreakDefault { get; set; }
+
+        public ICollection<Resource> Resources { get; set; }
     }
 }

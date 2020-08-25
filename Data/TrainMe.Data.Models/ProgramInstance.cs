@@ -6,6 +6,11 @@ namespace TrainMe.Data.Models
 
     public class ProgramInstance
     {
+        public ProgramInstance()
+        {
+            this.ExerciseInstances = new HashSet<ExerciseInstance>();
+        }
+
         [Key]
         public int Id { get; set; }
 

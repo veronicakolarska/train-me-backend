@@ -4,5 +4,7 @@ namespace TrainMe.Common
 {
     public class GlobalConstants
     {
+
+
     }
 }
