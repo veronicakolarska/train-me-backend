@@ -21,6 +21,8 @@
 
         public DbSet<Resource> Resources { get; set; }
 
+        public DbSet<ExerciseResource> ExerciseResources { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=.;Database=TrainMe;User Id=sa;Password=123456!!XX;");
@@ -28,7 +30,8 @@
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            modelBuilder.Entity<ExerciseResource>()
+                .HasKey(x => new { x.ExerciseId, x.ResourceId });
         }
 
         public override int SaveChanges() => this.SaveChanges(true);
@@ -65,7 +68,7 @@
                 }
                 else
                 {
-                    entity.UpdatedOn = DateTime.UtcNow;
+                    entity.ModifiedOn = DateTime.UtcNow;
                 }
             }
         }

@@ -5,7 +5,6 @@
     using TrainMe.Data;
     using TrainMe.Data.Models;
 
-
     class Program
     {
         static void Main(string[] args)
@@ -48,7 +47,7 @@
                 Description = "Standard crunches",
             });
 
-            var resourcePushUp = trainMeContext.Resources.AsQueryable().Where(resource => resource.Name == "Push ups").ToList().First();
+            var resourcePushUp = trainMeContext.Resources.AsQueryable().First(resource => resource.Exercises.Any(x => x.Exercise.Name == "Push ups"));
 
             trainMeContext.Exercises.Add(new Exercise()
             {
@@ -57,12 +56,18 @@
                 RepetitionsDefault = 20,
                 TempoDefault = "10/20",
                 BreakDefault = 30,
-                Resources = new HashSet<Resource>(){
-                    resourcePushUp,
-                },
             });
 
-            var resourceCrunches = trainMeContext.Resources.AsQueryable().Where(resource => resource.Name == "Crunches").ToList().First();
+            var exercisePushUp = trainMeContext.Exercises.AsQueryable().First(exercise => exercise.Name == "Push ups");
+
+            var newExcersiceResource = new ExerciseResource()
+            {
+                ResourceId = resourcePushUp.Id,
+                ExerciseId = exercisePushUp.Id,
+            };
+            trainMeContext.ExerciseResources.Add(newExcersiceResource);
+
+            var resourceCrunches = trainMeContext.Resources.AsQueryable().First(resource => resource.Name == "Crunches");
 
             trainMeContext.Exercises.Add(new Exercise()
             {
@@ -71,11 +76,16 @@
                 RepetitionsDefault = 30,
                 TempoDefault = "10/20",
                 BreakDefault = 30,
-                Resources = new HashSet<Resource>()
-                {
-                    resourceCrunches,
-                },
             });
+
+            var exerciseCrunches = trainMeContext.Exercises.AsQueryable().First(exercise => exercise.Name == "Crunches");
+
+            var newExcersiceResourceTwo = new ExerciseResource()
+            {
+                ResourceId = resourceCrunches.Id,
+                ExerciseId = exerciseCrunches.Id,
+            };
+            trainMeContext.ExerciseResources.Add(newExcersiceResourceTwo);
 
             var pushUps = trainMeContext.Exercises.AsQueryable().Where(exercise => exercise.Name == "Push ups").ToList().First();
 

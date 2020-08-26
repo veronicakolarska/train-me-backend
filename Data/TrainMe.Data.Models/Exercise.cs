@@ -1,6 +1,5 @@
 namespace TrainMe.Data.Models
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using TrainMe.Common;
@@ -9,7 +8,7 @@ namespace TrainMe.Data.Models
     {
         public Exercise()
         {
-            this.Resources = new HashSet<Resource>();
+            this.Resources = new HashSet<ExerciseResource>();
         }
 
         [Key]
@@ -33,6 +32,6 @@ namespace TrainMe.Data.Models
         [Range(GlobalConstants.ExerciseBreakMin, GlobalConstants.ExerciseBreakMax)]
         public int BreakDefault { get; set; }
 
-        public ICollection<Resource> Resources { get; set; }
+        public ICollection<ExerciseResource> Resources { get; set; }
     }
 }

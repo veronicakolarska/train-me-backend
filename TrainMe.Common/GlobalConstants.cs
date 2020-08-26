@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TrainMe.Common
+﻿namespace TrainMe.Common
 {
     public class GlobalConstants
     {

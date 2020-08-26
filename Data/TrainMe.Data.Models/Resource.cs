@@ -1,15 +1,14 @@
 namespace TrainMe.Data.Models
 {
-    using System;
     using System.Collections.Generic;
-    using TrainMe.Common;
     using System.ComponentModel.DataAnnotations;
+    using TrainMe.Common;
 
     public class Resource : AuditableEntity
     {
         public Resource()
         {
-            this.Exercises = new HashSet<Exercise>();
+            this.Exercises = new HashSet<ExerciseResource>();
         }
 
         [Key]
@@ -28,6 +27,6 @@ namespace TrainMe.Data.Models
         [StringLength(GlobalConstants.ResourceDescriptionMaxLength)]
         public string Description { get; set; }
 
-        public ICollection<Exercise> Exercises { get; set; }
+        public ICollection<ExerciseResource> Exercises { get; set; }
     }
 }
