@@ -8,7 +8,6 @@ namespace TrainMe.Data
     {
         public void Configure(EntityTypeBuilder<ProgramInstance> builder)
         {
-
             builder
                .HasKey(x => new { x.ProgramId, x.UserId });
         }

@@ -3,9 +3,11 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Microsoft.EntityFrameworkCore;
     using TrainMe.Data;
     using TrainMe.Data.Models;
     using TrainMe.Data.Repositories;
+    using TrainMe.Services.Data;
 
     class Program
     {
@@ -13,8 +15,11 @@
         {
             var trainMeContext = new TrainMeContext();
 
-            var efRepository = new EfRepository<User>(trainMeContext);
-            await efRepository.AddAsync(new User()
+            var efRepositoryUser = new EfRepository<User>(trainMeContext);
+            var efRepositoryProgram = new EfRepository<Data.Models.Program>(trainMeContext);
+            var efRepositoryProgramInstance = new EfRepository<ProgramInstance>(trainMeContext);
+
+            await efRepositoryUser.AddAsync(new User()
             {
                 FirstName = "Ivan",
                 LastName = "Petrov",
@@ -24,30 +29,58 @@
                 Gender = Gender.Male,
             });
 
-            await efRepository.SaveChangesAsync();
+            await efRepositoryUser.AddAsync(new User()
+            {
+                FirstName = "Petar",
+                LastName = "Simeonov",
+                Email = "pesho@abv.bg",
+                Password = "0012345678!",
+                Age = 25,
+                Gender = Gender.Male,
+            });
 
-            var users = efRepository.All().ToList();
+            await efRepositoryUser.SaveChangesAsync();
+
+            var users = efRepositoryUser.All().ToList();
             System.Console.WriteLine($"Users are = {users.Count}");
 
-            // trainMeContext.Users.Add(new User()
-            // {
-            //     FirstName = "Ivan",
-            //     LastName = "Ivanov",
-            //     Email = "Ivan@abv.bg",
-            //     Password = "12345678!",
-            //     Age = 28,
-            //     Gender = Gender.Male,
-            // });
+            var creator = efRepositoryUser.All().First(person => person.FirstName == "Ivan");
 
-            // trainMeContext.Users.Add(new User()
-            // {
-            //     FirstName = "Petar",
-            //     LastName = "Simeonov",
-            //     Email = "pesho@abv.bg",
-            //     Password = "0012345678!",
-            //     Age = 25,
-            //     Gender = Gender.Male,
-            // });
+            await efRepositoryProgram.AddAsync(new Data.Models.Program()
+            {
+                Name = "Weight loss",
+                CreatorId = creator.Id,
+                Exercises = new HashSet<Exercise>()
+                {
+                    new Exercise(){
+                        Name = "Push ups",
+                        SeriesDefault = 3,
+                        RepetitionsDefault = 20,
+                        TempoDefault = "10/20",
+                        BreakDefault = 30,
+                    },
+                    new Exercise()
+                    {
+                        Name = "Crunches",
+                        SeriesDefault = 3,
+                        RepetitionsDefault = 30,
+                        TempoDefault = "10/20",
+                        BreakDefault = 30,
+                    },
+                },
+            });
+
+            var programFirst = efRepositoryProgram.All().Include(x => x.Exercises).First();
+
+            await efRepositoryProgram.SaveChangesAsync();
+
+            var newProgramInstanceService = new ProgramInstanceService(
+                        efRepositoryProgram,
+                        efRepositoryUser,
+                        efRepositoryProgramInstance);
+
+            await newProgramInstanceService.CreateNewInstance(programFirst, creator);
+
 
             // trainMeContext.Resources.Add(new Resource()
             // {
