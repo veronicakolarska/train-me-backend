@@ -9,9 +9,9 @@
     using TrainMe.Data.Repositories;
     using TrainMe.Services.Data;
 
-    class Program
+    public class Program
     {
-        async static Task Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var trainMeContext = new TrainMeContext();
 
@@ -52,7 +52,8 @@
                 CreatorId = creator.Id,
                 Exercises = new HashSet<Exercise>()
                 {
-                    new Exercise(){
+                    new Exercise()
+                    {
                         Name = "Push ups",
                         SeriesDefault = 3,
                         RepetitionsDefault = 20,
@@ -80,7 +81,6 @@
                         efRepositoryProgramInstance);
 
             await newProgramInstanceService.CreateNewInstance(programFirst, creator);
-
 
             // trainMeContext.Resources.Add(new Resource()
             // {
