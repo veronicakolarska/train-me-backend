@@ -30,8 +30,31 @@
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ExerciseResource>()
-                .HasKey(x => new { x.ExerciseId, x.ResourceId });
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new ExerciseConfiguration());
+            modelBuilder.ApplyConfiguration(new ProgramConfiguration());
+            modelBuilder.ApplyConfiguration(new ResourceConfiguration());
+            modelBuilder.ApplyConfiguration(new ProgramInstanceConfiguration());
+            modelBuilder.ApplyConfiguration(new ExerciseResourceConfiguration());
+
+            var entityTypes = modelBuilder.Model.GetEntityTypes().ToList();
+
+            // Set global query filter for not deleted entities only
+            // var deletableEntityTypes = entityTypes
+            //     .Where(et => et.ClrType != null && typeof(IDeletableEntity).IsAssignableFrom(et.ClrType));
+            // foreach (var deletableEntityType in deletableEntityTypes)
+            // {
+            //     var method = SetIsDeletedQueryFilterMethod.MakeGenericMethod(deletableEntityType.ClrType);
+            //     method.Invoke(null, new object[] { modelBuilder });
+            // }
+
+            // Disable cascade delete
+            var foreignKeys = entityTypes
+                .SelectMany(e => e.GetForeignKeys().Where(f => f.DeleteBehavior == DeleteBehavior.Cascade));
+            foreach (var foreignKey in foreignKeys)
+            {
+                foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
+            }
         }
 
         public override int SaveChanges() => this.SaveChanges(true);

@@ -25,7 +25,6 @@ namespace TrainMe.Data.Repositories
 
         public IQueryable<TEntity> AllAsNoTrackingWithDeleted() => base.AllAsNoTracking().IgnoreQueryFilters();
 
-
         public void HardDelete(TEntity entity) => base.Delete(entity);
 
         public void Undelete(TEntity entity)
