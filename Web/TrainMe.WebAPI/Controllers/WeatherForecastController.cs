@@ -35,5 +35,34 @@ namespace TrainMe.WebAPI.Controllers
             })
             .ToArray();
         }
+
+        [HttpPost]
+        public ActionResult Post()
+        {
+            this._logger.LogInformation("Test string for post");
+            return Ok();
+        }
+
+        [HttpPut]
+        public ActionResult Put()
+        {
+            this._logger.LogInformation("Test string for put - upgrade");
+            return Ok();
+        }
+
+        [HttpPatch]
+        public ActionResult Patch()
+        {
+            this._logger.LogInformation("Test string for patch");
+            return Ok();
+        }
+
+        [HttpDelete]
+        public ActionResult Delete()
+        {
+            this._logger.LogInformation("Test string for delete");
+            return Ok();
+        }
+
     }
 }
