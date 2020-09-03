@@ -19,7 +19,7 @@ namespace TrainMe.Data.Models
         public string Name { get; set; }
 
         [Required]
-        public ResourceType Type { get; set; }
+        public TrainMe.Common.ResourceType Type { get; set; }
 
         [Required]
         public string Link { get; set; }

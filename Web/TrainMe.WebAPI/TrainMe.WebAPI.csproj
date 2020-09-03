@@ -9,5 +9,13 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.7" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Data\TrainMe.Data\TrainMe.Data.csproj" />
+    <ProjectReference Include="..\..\Data\TrainMe.Data.Models\TrainMe.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Services\TrainMe.Services.Data\TrainMe.Services.Data.csproj" />
+    <ProjectReference Include="..\TrainMe.WebAPI.Models\TrainMe.WebAPI.Models.csproj" />
+    <ProjectReference Include="..\..\TrainMe.Common\TrainMe.Common.csproj" />
+  </ItemGroup>
+
 
 </Project>

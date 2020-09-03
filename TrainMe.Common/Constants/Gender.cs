@@ -1,4 +1,4 @@
-namespace TrainMe.Data.Models
+namespace TrainMe.Common
 {
     public enum Gender
     {

@@ -10,6 +10,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using TrainMe.Data.Common.Repositories;
+using TrainMe.Data;
+using TrainMe.Data.Repositories;
+using TrainMe.Services.Data;
 
 namespace TrainMe.WebAPI
 {
@@ -25,6 +29,15 @@ namespace TrainMe.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Db Context
+            services.AddDbContext<TrainMeContext>();
+            // Data repositories
+            services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
+            services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
+            // Application services
+            services.AddTransient<IProgramInstanceService, ProgramInstanceService>();
+            services.AddTransient<IUserService, UserService>();
+
             services.AddControllers()
                  .AddJsonOptions(options =>
                 {

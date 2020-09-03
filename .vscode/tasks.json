@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/TrainMe.Console/TrainMe.Console.csproj",
+                "${workspaceFolder}/Web/TrainMe.WebAPI/TrainMe.WebAPI.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -19,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/TrainMe.Console/TrainMe.Console.csproj",
+                "${workspaceFolder}/Web/TrainMe.WebAPI/TrainMe.WebAPI.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -32,7 +32,7 @@
             "args": [
                 "watch",
                 "run",
-                "${workspaceFolder}/TrainMe.Console/TrainMe.Console.csproj",
+                "${workspaceFolder}/Web/TrainMe.WebAPI/TrainMe.WebAPI.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],

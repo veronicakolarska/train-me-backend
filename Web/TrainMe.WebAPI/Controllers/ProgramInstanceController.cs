@@ -4,36 +4,37 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using TrainMe.Services.Data;
+using TrainMe.WebAPI.Models;
 
 namespace TrainMe.WebAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    public class ProgramInstanceController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
+        private readonly ILogger<ProgramInstanceController> _logger;
+        private readonly IProgramInstanceService programInstanceService;
 
-        private readonly ILogger<WeatherForecastController> _logger;
-
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public ProgramInstanceController(
+            ILogger<ProgramInstanceController> logger,
+            IProgramInstanceService programInstanceService
+        )
         {
             _logger = logger;
+            this.programInstanceService = programInstanceService;
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public IEnumerable<ProgramInstanceViewModel> GetAll()
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
+            return this.programInstanceService.GetAll().Select((x) => new ProgramInstanceViewModel {
+                Id = x.Id,
+                UserId = x.UserId,
+                ProgramId = x.ProgramId,
+                CreatedOn = x.CreatedOn,
+                ModifiedOn = x.ModifiedOn
+            });
         }
 
         [HttpPost]
@@ -63,6 +64,8 @@ namespace TrainMe.WebAPI.Controllers
             this._logger.LogInformation("Test string for delete");
             return Ok();
         }
+
+
 
     }
 }

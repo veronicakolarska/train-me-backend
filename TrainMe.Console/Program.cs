@@ -26,7 +26,7 @@
                 Email = "Ivan@abv.bg",
                 Password = "12345678!",
                 Age = 28,
-                Gender = Gender.Male,
+                Gender = TrainMe.Common.Gender.Male,
             });
 
             await efRepositoryUser.AddAsync(new User()
@@ -36,7 +36,7 @@
                 Email = "pesho@abv.bg",
                 Password = "0012345678!",
                 Age = 25,
-                Gender = Gender.Male,
+                Gender = TrainMe.Common.Gender.Male,
             });
 
             await efRepositoryUser.SaveChangesAsync();
@@ -81,6 +81,9 @@
                         efRepositoryProgramInstance);
 
             await newProgramInstanceService.CreateNewInstance(programFirst, creator);
+
+            var newUserService = new UserService(efRepositoryUser);
+            await newUserService.Create(creator);
 
             // trainMeContext.Resources.Add(new Resource()
             // {
