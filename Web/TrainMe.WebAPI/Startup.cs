@@ -37,6 +37,8 @@ namespace TrainMe.WebAPI
             // Application services
             services.AddTransient<IProgramInstanceService, ProgramInstanceService>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IProgramService, ProgramService>();
+            services.AddTransient<IExerciseService, ExerciseService>();
 
             services.AddControllers()
                  .AddJsonOptions(options =>
