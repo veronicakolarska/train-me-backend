@@ -1,0 +1,13 @@
+using System;
+
+namespace TrainMe.WebAPI.Models
+{
+    public class ProgramInputModel
+    {
+        public string Name { get; set; }
+
+        public string Description { get; set; }
+
+        public int CreatorId { get; set; }
+    }
+}

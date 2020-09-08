@@ -18,15 +18,17 @@ namespace TrainMe.Services.Data
             this.exerciseRepository = exerciseRepository;
         }
 
-        public Task Create(Exercise exercise)
+        public async Task Create(Exercise exercise)
         {
-            return this.exerciseRepository.AddAsync(exercise);
+            await this.exerciseRepository.AddAsync(exercise);
+            await this.exerciseRepository.SaveChangesAsync();
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
             var exercise = this.GetById(id);
             this.exerciseRepository.Delete(exercise);
+            await this.exerciseRepository.SaveChangesAsync();
         }
 
         public bool Exists(int id)
@@ -45,9 +47,10 @@ namespace TrainMe.Services.Data
             return this.GetAll().First((x) => x.Id == id);
         }
 
-        public void Update(Exercise exercise)
+        public async Task Update(Exercise exercise)
         {
             this.exerciseRepository.Update(exercise);
+            await this.exerciseRepository.SaveChangesAsync();
         }
     }
 }
