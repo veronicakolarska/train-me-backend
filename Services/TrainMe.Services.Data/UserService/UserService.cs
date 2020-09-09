@@ -18,15 +18,10 @@ namespace TrainMe.Services.Data
             this.userRepository = userRepository;
         }
 
-        public Task Create(User user)
+        public async Task Create(User user)
         {
-            return this.userRepository.AddAsync(user);
-        }
-
-        public void Delete(int id)
-        {
-            var user = this.GetById(id);
-            this.userRepository.Delete(user);
+            await this.userRepository.AddAsync(user);
+            await this.userRepository.SaveChangesAsync();
         }
 
         public bool Exists(int id)
@@ -45,9 +40,17 @@ namespace TrainMe.Services.Data
             return this.GetAll().First((x) => x.Id == id);
         }
 
-        public void Update(User user)
+        public async Task Delete(int id)
+        {
+            var user = this.GetById(id);
+            this.userRepository.Delete(user);
+            await this.userRepository.SaveChangesAsync();
+        }
+
+        public async Task Update(User user)
         {
             this.userRepository.Update(user);
+            await this.userRepository.SaveChangesAsync();
         }
     }
 }

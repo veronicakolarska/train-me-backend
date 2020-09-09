@@ -9,13 +9,13 @@ namespace TrainMe.Services.Data
     {
         Task Create(Resource resource);
 
-        void Update(Resource resource);
+        Task Update(Resource resource);
 
         Resource GetById(int id);
 
         bool Exists(int id);
 
-        void Delete(int id);
+        Task Delete(int id);
 
         IEnumerable<Resource> GetAll();
     }

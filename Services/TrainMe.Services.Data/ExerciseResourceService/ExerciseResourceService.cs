@@ -9,34 +9,48 @@ namespace TrainMe.Services.Data
 {
     public class ExerciseResourceService : IExerciseResourceService
     {
-        public Task Create(ExerciseResource exerciseResource)
+        private readonly IRepository<ExerciseResource> exerciseResourceRepository;
+
+        public ExerciseResourceService(
+           IRepository<ExerciseResource> exerciseResourceRepository
+       )
         {
-            throw new NotImplementedException();
+            this.exerciseResourceRepository = exerciseResourceRepository;
         }
 
-        public Task Delete(int id)
+        public async Task Create(ExerciseResource exerciseResource)
         {
-            throw new NotImplementedException();
+            await this.exerciseResourceRepository.AddAsync(exerciseResource);
+            await this.exerciseResourceRepository.SaveChangesAsync();
         }
 
-        public bool Exists(int id)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            var exerciseResource = this.GetById(id);
+            this.exerciseResourceRepository.Delete(exerciseResource);
+            await this.exerciseResourceRepository.SaveChangesAsync();
+        }
+
+        public bool Exists(int exerciseId)
+        {
+            return this.exerciseResourceRepository.All().Any((x) => x.ExerciseId == exerciseId);
         }
 
         public IEnumerable<ExerciseResource> GetAll()
         {
-            throw new NotImplementedException();
+            var exerciseResource = this.exerciseResourceRepository.All();
+            return exerciseResource;
         }
 
-        public ExerciseResource GetById(int id)
+        public ExerciseResource GetById(int exerciseId)
         {
-            throw new NotImplementedException();
+            return this.GetAll().First((x) => x.ExerciseId == exerciseId);
         }
 
-        public Task Update(ExerciseResource exerciseResource)
+        public async Task Update(ExerciseResource exerciseResource)
         {
-            throw new NotImplementedException();
+            this.exerciseResourceRepository.Update(exerciseResource);
+            await this.exerciseResourceRepository.SaveChangesAsync();
         }
     }
 }

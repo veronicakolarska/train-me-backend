@@ -23,10 +23,11 @@ namespace TrainMe.Services.Data
             return this.programRepository.AddAsync(program);
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
             var program = this.GetById(id);
             this.programRepository.Delete(program);
+            await this.programRepository.SaveChangesAsync();
         }
 
         public bool Exists(int id)
@@ -45,9 +46,10 @@ namespace TrainMe.Services.Data
             return this.GetAll().First((x) => x.Id == id);
         }
 
-        public void Update(Program program)
+        public async Task Update(Program program)
         {
             this.programRepository.Update(program);
+            await this.programRepository.SaveChangesAsync();
         }
     }
 }

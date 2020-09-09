@@ -9,34 +9,46 @@ namespace TrainMe.Services.Data
 {
     public class ResourceService : IResourceService
     {
-        public Task Create(Resource resource)
+        private readonly IRepository<Resource> resourceRepository;
+
+        public ResourceService(IRepository<Resource> resourceRepository)
         {
-            throw new NotImplementedException();
+
+            this.resourceRepository = resourceRepository;
         }
 
-        public void Delete(int id)
+        public Task Create(Resource resource)
         {
-            throw new NotImplementedException();
+            return this.resourceRepository.AddAsync(resource);
+        }
+
+        public async Task Delete(int id)
+        {
+            var resource = this.GetById(id);
+            this.resourceRepository.Delete(resource);
+            await this.resourceRepository.SaveChangesAsync();
         }
 
         public bool Exists(int id)
         {
-            throw new NotImplementedException();
+            return this.resourceRepository.All().Any((x) => x.Id == id);
         }
 
         public IEnumerable<Resource> GetAll()
         {
-            throw new NotImplementedException();
+            var resources = this.resourceRepository.All();
+            return resources;
         }
 
         public Resource GetById(int id)
         {
-            throw new NotImplementedException();
+            return this.GetAll().First((x) => x.Id == id);
         }
 
-        public void Update(Resource resource)
+        public async Task Update(Resource resource)
         {
-            throw new NotImplementedException();
+            this.resourceRepository.Update(resource);
+            await this.resourceRepository.SaveChangesAsync();
         }
     }
 }

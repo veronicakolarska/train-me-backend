@@ -10,13 +10,13 @@ namespace TrainMe.Services.Data
     {
         Task Create(Program program);
 
-        void Update(Program program);
+        Task Update(Program program);
 
         Program GetById(int id);
 
         bool Exists(int id);
 
-        void Delete(int id);
+        Task Delete(int id);
 
         IEnumerable<Program> GetAll();
     }
