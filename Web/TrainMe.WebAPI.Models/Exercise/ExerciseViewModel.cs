@@ -6,6 +6,8 @@ namespace TrainMe.WebAPI.Models
     {
         public int Id { get; set; }
 
+        public int ProgramId {get; set; }
+
         public string Name { get; set; }
 
         public int SeriesDefault { get; set; }

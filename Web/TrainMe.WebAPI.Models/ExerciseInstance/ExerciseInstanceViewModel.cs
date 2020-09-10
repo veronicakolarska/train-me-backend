@@ -8,6 +8,8 @@ namespace TrainMe.WebAPI.Models
 
         public int ExerciseId { get; set; }
 
+        public int ProgramInstanceId { get; set; }
+
         public int Series { get; set; }
 
         public int Repetitions { get; set; }

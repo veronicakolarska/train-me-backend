@@ -33,6 +33,7 @@ namespace TrainMe.WebAPI.Controllers
             {
                 Id = x.Id,
                 Name = x.Name,
+                ProgramId = x.ProgramId,
                 SeriesDefault = x.SeriesDefault,
                 RepetitionsDefault = x.RepetitionsDefault,
                 TempoDefault = x.TempoDefault,
@@ -57,6 +58,7 @@ namespace TrainMe.WebAPI.Controllers
             {
                 Id = result.Id,
                 Name = result.Name,
+                ProgramId = result.ProgramId,
                 SeriesDefault = result.SeriesDefault,
                 RepetitionsDefault = result.RepetitionsDefault,
                 TempoDefault = result.TempoDefault,
@@ -74,6 +76,7 @@ namespace TrainMe.WebAPI.Controllers
             var exercise = new Exercise
             {
                 Name = model.Name,
+                ProgramId = model.ProgramId,
                 SeriesDefault = model.SeriesDefault,
                 RepetitionsDefault = model.RepetitionsDefault,
                 TempoDefault = model.TempoDefault,

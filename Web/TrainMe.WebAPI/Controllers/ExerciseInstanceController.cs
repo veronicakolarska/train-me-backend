@@ -33,6 +33,7 @@ namespace TrainMe.WebAPI.Controllers
             {
                 Id = x.Id,
                 ExerciseId = x.ExerciseId,
+                ProgramInstanceId = x.ProgramInstanceId,
                 Series = x.Series,
                 Repetitions = x.Repetitions,
                 Tempo = x.Tempo,
@@ -57,6 +58,7 @@ namespace TrainMe.WebAPI.Controllers
             {
                 Id = result.Id,
                 ExerciseId = result.ExerciseId,
+                ProgramInstanceId = result.ProgramInstanceId,
                 Series = result.Series,
                 Repetitions = result.Repetitions,
                 Tempo = result.Tempo,
@@ -74,6 +76,7 @@ namespace TrainMe.WebAPI.Controllers
             var exerciseInstance = new ExerciseInstance
             {
                 ExerciseId = model.ExerciseId,
+                ProgramInstanceId = model.ProgramInstanceId,
                 Series = model.Series,
                 Repetitions = model.Repetitions,
                 Tempo = model.Tempo,
