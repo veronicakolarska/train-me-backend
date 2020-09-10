@@ -1,4 +1,5 @@
 using System;
+using TrainMe.Common;
 
 namespace TrainMe.WebAPI.Models
 {
@@ -8,7 +9,7 @@ namespace TrainMe.WebAPI.Models
 
         public string Name { get; set; }
 
-        public TrainMe.Common.ResourceType Type { get; set; }
+        public ResourceType Type { get; set; }
 
         public string Link { get; set; }
 

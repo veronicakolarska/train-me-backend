@@ -39,12 +39,41 @@ namespace TrainMe.WebAPI.Controllers
             });
         }
 
-        [HttpPost]
-        public ActionResult Post()
+        [HttpGet("{id}")]
+        public ActionResult<ProgramViewModel> GetById(int id)
         {
-            this._logger.LogInformation("Test string for post");
+            var exists = this.programService.Exists(id);
+            if (!exists)
+            {
+                return this.NotFound();
+            }
+            var result = programService.GetById(id);
+
+            var programViewModel = new ProgramViewModel
+            {
+                Id = result.Id,
+                Name = result.Name,
+                Description = result.Description,
+                CreatorId = result.CreatorId,
+                CreatedOn = result.CreatedOn,
+                ModifiedOn = result.ModifiedOn
+            };
+            return this.Ok(programViewModel);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Post(ProgramInputModel model)
+        {
+            var program = new TrainMe.Data.Models.Program
+            {
+                Name = model.Name,
+                Description = model.Description,
+                CreatorId = model.CreatorId,
+            };
+            await this.programService.Create(program);
             return Ok();
         }
+
 
         [HttpPut]
         public ActionResult Put()
@@ -53,18 +82,17 @@ namespace TrainMe.WebAPI.Controllers
             return Ok();
         }
 
-        [HttpPatch]
-        public ActionResult Patch()
-        {
-            this._logger.LogInformation("Test string for patch");
-            return Ok();
-        }
 
-        [HttpDelete]
-        public ActionResult Delete()
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(int id)
         {
-            this._logger.LogInformation("Test string for delete");
-            return Ok();
+            var exists = programService.Exists(id);
+            if (!exists)
+            {
+                return this.NotFound();
+            }
+            await this.programService.Delete(id);
+            return this.Ok();
         }
     }
 }

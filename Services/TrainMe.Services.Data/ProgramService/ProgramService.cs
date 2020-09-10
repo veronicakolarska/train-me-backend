@@ -18,9 +18,10 @@ namespace TrainMe.Services.Data
             this.programRepository = programRepository;
         }
 
-        public Task Create(Program program)
+        public async Task Create(Program program)
         {
-            return this.programRepository.AddAsync(program);
+            await this.programRepository.AddAsync(program);
+            await this.programRepository.SaveChangesAsync();
         }
 
         public async Task Delete(int id)

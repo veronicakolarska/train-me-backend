@@ -24,9 +24,11 @@ namespace TrainMe.Services.Data
             this.programInstanceRepository = programInstanceRepository;
         }
 
-        public Task Create(ProgramInstance programInstance)
+        public async Task Create(ProgramInstance programInstance)
         {
-            return this.programInstanceRepository.AddAsync(programInstance);
+            await this.programInstanceRepository.AddAsync(programInstance);
+            await this.programInstanceRepository.SaveChangesAsync();
+
         }
 
         public async Task CreateNewInstance(Program program, User user)
@@ -73,10 +75,11 @@ namespace TrainMe.Services.Data
             await this.programInstanceRepository.SaveChangesAsync();
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
             var programInstance = this.GetById(id);
             this.programInstanceRepository.Delete(programInstance);
+            await this.programInstanceRepository.SaveChangesAsync();
         }
 
         public bool Exists(int id)
@@ -95,9 +98,10 @@ namespace TrainMe.Services.Data
             return this.GetAll().First((x) => x.Id == id);
         }
 
-        public void Update(ProgramInstance programInstance)
+        public async Task Update(ProgramInstance programInstance)
         {
             this.programInstanceRepository.Update(programInstance);
+            await this.programInstanceRepository.SaveChangesAsync();
         }
     }
 }

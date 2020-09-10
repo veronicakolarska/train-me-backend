@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using TrainMe.Data.Models;
 using TrainMe.Services.Data;
 using TrainMe.WebAPI.Models;
 
@@ -28,7 +29,8 @@ namespace TrainMe.WebAPI.Controllers
         [HttpGet]
         public IEnumerable<ProgramInstanceViewModel> GetAll()
         {
-            return this.programInstanceService.GetAll().Select((x) => new ProgramInstanceViewModel {
+            return this.programInstanceService.GetAll().Select((x) => new ProgramInstanceViewModel
+            {
                 Id = x.Id,
                 UserId = x.UserId,
                 ProgramId = x.ProgramId,
@@ -37,12 +39,41 @@ namespace TrainMe.WebAPI.Controllers
             });
         }
 
-        [HttpPost]
-        public ActionResult Post()
+
+        [HttpGet("{id}")]
+        public ActionResult<ProgramInputModel> GetById(int id)
         {
-            this._logger.LogInformation("Test string for post");
+            var exists = this.programInstanceService.Exists(id);
+            if (!exists)
+            {
+                return this.NotFound();
+            }
+            var result = programInstanceService.GetById(id);
+
+            var programInstanceViewModel = new ProgramInstanceViewModel
+            {
+                Id = result.Id,
+                ProgramId = result.ProgramId,
+                UserId = result.UserId,
+                CreatedOn = result.CreatedOn,
+                ModifiedOn = result.ModifiedOn
+            };
+            return this.Ok(programInstanceViewModel);
+        }
+
+
+        [HttpPost]
+        public async Task<ActionResult> Post(ProgramInstanceInputModel model)
+        {
+            var user = new ProgramInstance
+            {
+                ProgramId = model.ProgramId,
+                UserId = model.UserId,
+            };
+            await this.programInstanceService.Create(user);
             return Ok();
         }
+
 
         [HttpPut]
         public ActionResult Put()
@@ -51,21 +82,17 @@ namespace TrainMe.WebAPI.Controllers
             return Ok();
         }
 
-        [HttpPatch]
-        public ActionResult Patch()
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(int id)
         {
-            this._logger.LogInformation("Test string for patch");
-            return Ok();
+            var exists = programInstanceService.Exists(id);
+            if (!exists)
+            {
+                return this.NotFound();
+            }
+            await this.programInstanceService.Delete(id);
+            return this.Ok();
         }
-
-        [HttpDelete]
-        public ActionResult Delete()
-        {
-            this._logger.LogInformation("Test string for delete");
-            return Ok();
-        }
-
-
-
     }
 }

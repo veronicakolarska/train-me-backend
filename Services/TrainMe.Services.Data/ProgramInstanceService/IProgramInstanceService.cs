@@ -11,13 +11,13 @@ namespace TrainMe.Services.Data
 
         Task Create(ProgramInstance programInstance);
 
-        void Update(ProgramInstance programInstance);
+        Task Update(ProgramInstance programInstance);
 
         ProgramInstance GetById(int id);
 
         bool Exists(int id);
 
-        void Delete(int id);
+        Task Delete(int id);
 
         IEnumerable<ProgramInstance> GetAll();
     }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using TrainMe.Data.Models;
 using TrainMe.Services.Data;
 using TrainMe.WebAPI.Models;
 
@@ -28,7 +29,8 @@ namespace TrainMe.WebAPI.Controllers
         [HttpGet]
         public IEnumerable<UserViewModel> GetAll()
         {
-            return this.userService.GetAll().Select((x) => new UserViewModel {
+            return this.userService.GetAll().Select((x) => new UserViewModel
+            {
                 Id = x.Id,
                 FirstName = x.FirstName,
                 LastName = x.LastName,
@@ -41,10 +43,44 @@ namespace TrainMe.WebAPI.Controllers
             });
         }
 
-        [HttpPost]
-        public ActionResult Post()
+        [HttpGet("{id}")]
+        public ActionResult<UserViewModel> GetById(int id)
         {
-            this._logger.LogInformation("Test string for post");
+            var exists = this.userService.Exists(id);
+            if (!exists)
+            {
+                return this.NotFound();
+            }
+            var result = userService.GetById(id);
+
+            var userViewModel = new UserViewModel
+            {
+                Id = result.Id,
+                FirstName = result.FirstName,
+                LastName = result.LastName,
+                Email = result.Email,
+                Password = result.Password,
+                Age = result.Age,
+                Gender = result.Gender,
+                CreatedOn = result.CreatedOn,
+                ModifiedOn = result.ModifiedOn
+            };
+            return this.Ok(userViewModel);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Post(UserInputModel model)
+        {
+            var user = new User
+            {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Email = model.Email,
+                Password = model.Password,
+                Age = model.Age,
+                Gender = model.Gender,
+            };
+            await this.userService.Create(user);
             return Ok();
         }
 
@@ -55,18 +91,16 @@ namespace TrainMe.WebAPI.Controllers
             return Ok();
         }
 
-        [HttpPatch]
-        public ActionResult Patch()
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(int id)
         {
-            this._logger.LogInformation("Test string for patch");
-            return Ok();
-        }
-
-        [HttpDelete]
-        public ActionResult Delete()
-        {
-            this._logger.LogInformation("Test string for delete");
-            return Ok();
+            var exists = userService.Exists(id);
+            if (!exists)
+            {
+                return this.NotFound();
+            }
+            await this.userService.Delete(id);
+            return this.Ok();
         }
     }
 }

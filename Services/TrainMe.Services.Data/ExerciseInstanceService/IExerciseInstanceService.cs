@@ -7,7 +7,7 @@ namespace TrainMe.Services.Data
 {
     public interface IExerciseInstanceService
     {
-        Task CreateNewInstance(Exercise exercise, User user);
+        Task CreateNewInstance(Program program);
 
         Task Create(ExerciseInstance exerciseInstance);
 

@@ -1,4 +1,5 @@
 using System;
+using TrainMe.Common;
 
 namespace TrainMe.WebAPI.Models
 {
@@ -14,6 +15,6 @@ namespace TrainMe.WebAPI.Models
 
         public int Age { get; set; }
 
-        public TrainMe.Common.Gender Gender { get; set; }
+        public Gender Gender { get; set; }
     }
 }

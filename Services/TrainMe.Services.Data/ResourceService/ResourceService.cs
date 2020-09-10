@@ -17,9 +17,10 @@ namespace TrainMe.Services.Data
             this.resourceRepository = resourceRepository;
         }
 
-        public Task Create(Resource resource)
+        public async Task Create(Resource resource)
         {
-            return this.resourceRepository.AddAsync(resource);
+            await this.resourceRepository.AddAsync(resource);
+            await this.resourceRepository.SaveChangesAsync();
         }
 
         public async Task Delete(int id)
