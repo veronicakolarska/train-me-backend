@@ -10,14 +10,14 @@ using TrainMe.Data;
 namespace TrainMe.Data.Migrations
 {
     [DbContext(typeof(TrainMeContext))]
-    [Migration("20200831072110_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20200910132528_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.7")
+                .HasAnnotation("ProductVersion", "3.1.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -42,7 +42,7 @@ namespace TrainMe.Data.Migrations
                         .HasColumnType("nvarchar(40)")
                         .HasMaxLength(40);
 
-                    b.Property<int?>("ProgramId")
+                    b.Property<int>("ProgramId")
                         .HasColumnType("int");
 
                     b.Property<int>("RepetitionsDefault")
@@ -81,10 +81,7 @@ namespace TrainMe.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("ProgramInstanceProgramId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ProgramInstanceUserId")
+                    b.Property<int>("ProgramInstanceId")
                         .HasColumnType("int");
 
                     b.Property<int>("Repetitions")
@@ -101,7 +98,7 @@ namespace TrainMe.Data.Migrations
 
                     b.HasIndex("ExerciseId");
 
-                    b.HasIndex("ProgramInstanceProgramId", "ProgramInstanceUserId");
+                    b.HasIndex("ProgramInstanceId");
 
                     b.ToTable("ExerciseInstances");
                 });
@@ -161,22 +158,26 @@ namespace TrainMe.Data.Migrations
 
             modelBuilder.Entity("TrainMe.Data.Models.ProgramInstance", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("ProgramId")
                         .HasColumnType("int");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
+                    b.HasKey("Id");
 
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("ProgramId", "UserId");
+                    b.HasIndex("ProgramId");
 
                     b.HasIndex("UserId");
 
@@ -263,34 +264,38 @@ namespace TrainMe.Data.Migrations
 
             modelBuilder.Entity("TrainMe.Data.Models.Exercise", b =>
                 {
-                    b.HasOne("TrainMe.Data.Models.Program", null)
+                    b.HasOne("TrainMe.Data.Models.Program", "Program")
                         .WithMany("Exercises")
-                        .HasForeignKey("ProgramId");
+                        .HasForeignKey("ProgramId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("TrainMe.Data.Models.ExerciseInstance", b =>
                 {
                     b.HasOne("TrainMe.Data.Models.Exercise", "Exercise")
-                        .WithMany()
+                        .WithMany("ExerciseInstances")
                         .HasForeignKey("ExerciseId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("TrainMe.Data.Models.ProgramInstance", null)
+                    b.HasOne("TrainMe.Data.Models.ProgramInstance", "ProgramInstance")
                         .WithMany("ExerciseInstances")
-                        .HasForeignKey("ProgramInstanceProgramId", "ProgramInstanceUserId");
+                        .HasForeignKey("ProgramInstanceId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("TrainMe.Data.Models.ExerciseResource", b =>
                 {
                     b.HasOne("TrainMe.Data.Models.Exercise", "Exercise")
-                        .WithMany("Resources")
+                        .WithMany("ExerciseResources")
                         .HasForeignKey("ExerciseId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("TrainMe.Data.Models.Resource", "Resource")
-                        .WithMany("Exercises")
+                        .WithMany("ExerciseResources")
                         .HasForeignKey("ResourceId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();

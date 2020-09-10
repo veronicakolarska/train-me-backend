@@ -40,7 +40,7 @@ namespace TrainMe.Data.Migrations
                         .HasColumnType("nvarchar(40)")
                         .HasMaxLength(40);
 
-                    b.Property<int?>("ProgramId")
+                    b.Property<int>("ProgramId")
                         .HasColumnType("int");
 
                     b.Property<int>("RepetitionsDefault")
@@ -79,7 +79,7 @@ namespace TrainMe.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("ProgramInstanceId")
+                    b.Property<int>("ProgramInstanceId")
                         .HasColumnType("int");
 
                     b.Property<int>("Repetitions")
@@ -175,10 +175,9 @@ namespace TrainMe.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("ProgramId");
 
-                    b.HasIndex("ProgramId", "UserId")
-                        .IsUnique();
+                    b.HasIndex("UserId");
 
                     b.ToTable("ProgramInstances");
                 });
@@ -263,34 +262,38 @@ namespace TrainMe.Data.Migrations
 
             modelBuilder.Entity("TrainMe.Data.Models.Exercise", b =>
                 {
-                    b.HasOne("TrainMe.Data.Models.Program", null)
+                    b.HasOne("TrainMe.Data.Models.Program", "Program")
                         .WithMany("Exercises")
-                        .HasForeignKey("ProgramId");
+                        .HasForeignKey("ProgramId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("TrainMe.Data.Models.ExerciseInstance", b =>
                 {
                     b.HasOne("TrainMe.Data.Models.Exercise", "Exercise")
-                        .WithMany()
+                        .WithMany("ExerciseInstances")
                         .HasForeignKey("ExerciseId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("TrainMe.Data.Models.ProgramInstance", null)
+                    b.HasOne("TrainMe.Data.Models.ProgramInstance", "ProgramInstance")
                         .WithMany("ExerciseInstances")
-                        .HasForeignKey("ProgramInstanceId");
+                        .HasForeignKey("ProgramInstanceId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("TrainMe.Data.Models.ExerciseResource", b =>
                 {
                     b.HasOne("TrainMe.Data.Models.Exercise", "Exercise")
-                        .WithMany("Resources")
+                        .WithMany("ExerciseResources")
                         .HasForeignKey("ExerciseId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("TrainMe.Data.Models.Resource", "Resource")
-                        .WithMany("Exercises")
+                        .WithMany("ExerciseResources")
                         .HasForeignKey("ResourceId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();

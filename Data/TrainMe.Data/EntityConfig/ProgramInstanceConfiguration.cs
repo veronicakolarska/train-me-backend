@@ -8,10 +8,9 @@ namespace TrainMe.Data
     {
         public void Configure(EntityTypeBuilder<ProgramInstance> builder)
         {
-            builder
-               .HasKey(x => x.Id);
-
-            builder.HasIndex(x => new { x.ProgramId, x.UserId }).IsUnique();
+            builder.HasMany(x => x.ExerciseInstances)
+                .WithOne(x => x.ProgramInstance)
+                .HasForeignKey(x => x.ProgramInstanceId);
         }
     }
 }

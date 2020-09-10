@@ -8,7 +8,7 @@ namespace TrainMe.Data.Models
     {
         public Resource()
         {
-            this.Exercises = new HashSet<ExerciseResource>();
+            this.ExerciseResources = new HashSet<ExerciseResource>();
         }
 
         [Key]
@@ -27,6 +27,6 @@ namespace TrainMe.Data.Models
         [StringLength(GlobalConstants.ResourceDescriptionMaxLength)]
         public string Description { get; set; }
 
-        public ICollection<ExerciseResource> Exercises { get; set; }
+        public ICollection<ExerciseResource> ExerciseResources { get; set; }
     }
 }

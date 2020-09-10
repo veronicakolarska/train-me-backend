@@ -8,11 +8,15 @@ namespace TrainMe.Data.Models
     {
         public Exercise()
         {
-            this.Resources = new HashSet<ExerciseResource>();
+            this.ExerciseResources = new HashSet<ExerciseResource>();
         }
 
         [Key]
         public int Id { get; set; }
+
+        public int ProgramId { get; set; }
+
+        public Program Program { get; set; }
 
         [Required]
         [StringLength(GlobalConstants.ExerciseNameMaxLength, MinimumLength = GlobalConstants.ExerciseNameMinLength)]
@@ -32,6 +36,8 @@ namespace TrainMe.Data.Models
         [Range(GlobalConstants.ExerciseBreakMin, GlobalConstants.ExerciseBreakMax)]
         public int BreakDefault { get; set; }
 
-        public ICollection<ExerciseResource> Resources { get; set; }
+        public ICollection<ExerciseResource> ExerciseResources { get; set; }
+
+        public ICollection<ExerciseInstance> ExerciseInstances { get; set; }
     }
 }

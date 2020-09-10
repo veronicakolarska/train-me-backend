@@ -8,7 +8,10 @@ namespace TrainMe.Data
     {
         public void Configure(EntityTypeBuilder<Exercise> builder)
         {
-
+            builder
+                .HasMany(x => x.ExerciseResources)
+                .WithOne(x => x.Exercise)
+                .HasForeignKey(x => x.ExerciseId);
         }
     }
 }

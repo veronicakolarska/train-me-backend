@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TrainMe.Data.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -76,12 +76,12 @@ namespace TrainMe.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
+                    ProgramId = table.Column<int>(nullable: false),
                     Name = table.Column<string>(maxLength: 40, nullable: false),
                     SeriesDefault = table.Column<int>(nullable: false),
                     RepetitionsDefault = table.Column<int>(nullable: false),
                     TempoDefault = table.Column<string>(maxLength: 20, nullable: true),
-                    BreakDefault = table.Column<int>(nullable: false),
-                    ProgramId = table.Column<int>(nullable: true)
+                    BreakDefault = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -98,15 +98,16 @@ namespace TrainMe.Data.Migrations
                 name: "ProgramInstances",
                 columns: table => new
                 {
-                    ProgramId = table.Column<int>(nullable: false),
-                    UserId = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
-                    Id = table.Column<int>(nullable: false)
+                    ProgramId = table.Column<int>(nullable: false),
+                    UserId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProgramInstances", x => new { x.ProgramId, x.UserId });
+                    table.PrimaryKey("PK_ProgramInstances", x => x.Id);
                     table.ForeignKey(
                         name: "FK_ProgramInstances_Programs_ProgramId",
                         column: x => x.ProgramId,
@@ -156,12 +157,11 @@ namespace TrainMe.Data.Migrations
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     ExerciseId = table.Column<int>(nullable: false),
+                    ProgramInstanceId = table.Column<int>(nullable: false),
                     Series = table.Column<int>(nullable: false),
                     Repetitions = table.Column<int>(nullable: false),
                     Tempo = table.Column<string>(maxLength: 20, nullable: true),
-                    Break = table.Column<int>(nullable: false),
-                    ProgramInstanceProgramId = table.Column<int>(nullable: true),
-                    ProgramInstanceUserId = table.Column<int>(nullable: true)
+                    Break = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -173,10 +173,10 @@ namespace TrainMe.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_ExerciseInstances_ProgramInstances_ProgramInstanceProgramId_ProgramInstanceUserId",
-                        columns: x => new { x.ProgramInstanceProgramId, x.ProgramInstanceUserId },
+                        name: "FK_ExerciseInstances_ProgramInstances_ProgramInstanceId",
+                        column: x => x.ProgramInstanceId,
                         principalTable: "ProgramInstances",
-                        principalColumns: new[] { "ProgramId", "UserId" },
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -186,9 +186,9 @@ namespace TrainMe.Data.Migrations
                 column: "ExerciseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ExerciseInstances_ProgramInstanceProgramId_ProgramInstanceUserId",
+                name: "IX_ExerciseInstances_ProgramInstanceId",
                 table: "ExerciseInstances",
-                columns: new[] { "ProgramInstanceProgramId", "ProgramInstanceUserId" });
+                column: "ProgramInstanceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ExerciseResources_ResourceId",
@@ -198,6 +198,11 @@ namespace TrainMe.Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Exercises_ProgramId",
                 table: "Exercises",
+                column: "ProgramId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProgramInstances_ProgramId",
+                table: "ProgramInstances",
                 column: "ProgramId");
 
             migrationBuilder.CreateIndex(

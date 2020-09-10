@@ -15,6 +15,10 @@ namespace TrainMe.Data.Models
 
         public Exercise Exercise { get; set; }
 
+        public int ProgramInstanceId { get; set; }
+
+        public ProgramInstance ProgramInstance { get; set; }
+
         [Required]
         [Range(GlobalConstants.ExerciseSeriesMin, GlobalConstants.ExerciseSeriesMax)]
         public int Series { get; set; }

@@ -34,7 +34,7 @@
         [Range(GlobalConstants.UserMinAge, GlobalConstants.UserMaxAge)]
         public int Age { get; set; }
 
-        public TrainMe.Common.Gender Gender { get; set; }
+        public Gender Gender { get; set; }
 
         public ICollection<ProgramInstance> ProgramInstances { get; set; }
     }
