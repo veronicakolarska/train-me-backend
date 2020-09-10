@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TrainMe.Data;
 
 namespace TrainMe.Data.Migrations
 {
     [DbContext(typeof(TrainMeContext))]
-    partial class TrainMeContextModelSnapshot : ModelSnapshot
+    [Migration("20200910112907_InitialServices")]
+    partial class InitialServices
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
