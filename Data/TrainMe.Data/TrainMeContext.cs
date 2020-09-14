@@ -23,6 +23,8 @@
 
         public DbSet<ExerciseResource> ExerciseResources { get; set; }
 
+        public TrainMeContext() { }
+
         public TrainMeContext(DbContextOptions<TrainMeContext> options)
             : base(options) { }
 
