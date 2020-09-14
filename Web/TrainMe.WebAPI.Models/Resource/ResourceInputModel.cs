@@ -5,6 +5,8 @@ namespace TrainMe.WebAPI.Models
 {
     public class ResourceInputModel
     {
+        public int Id { get; set; }
+
         public string Name { get; set; }
 
         public ResourceType Type { get; set; }

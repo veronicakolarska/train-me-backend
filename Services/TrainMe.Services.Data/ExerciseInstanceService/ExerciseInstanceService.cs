@@ -51,7 +51,7 @@ namespace TrainMe.Services.Data
 
         public ExerciseInstance GetById(int id)
         {
-            return this.GetAll().First((x) => x.Id == id);
+            return this.GetAll().FirstOrDefault((x) => x.Id == id);
         }
 
         public async Task Update(ExerciseInstance exerciseInstance)

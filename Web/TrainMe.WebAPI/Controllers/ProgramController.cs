@@ -76,10 +76,19 @@ namespace TrainMe.WebAPI.Controllers
 
 
         [HttpPut]
-        public ActionResult Put()
+        public async Task<ActionResult> Put(ProgramInputModel model)
         {
-            this._logger.LogInformation("Test string for put - upgrade");
-            return Ok();
+            var program = this.programService.GetById(model.Id);
+            if (program == null)
+            {
+                return this.NotFound();
+            }
+            program.Name = model.Name;
+            program.Description = model.Description;
+            program.CreatorId = model.CreatorId;
+
+            await this.programService.Update(program);
+            return this.Ok();
         }
 
 

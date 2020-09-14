@@ -85,10 +85,22 @@ namespace TrainMe.WebAPI.Controllers
         }
 
         [HttpPut]
-        public ActionResult Put()
+        public async Task<ActionResult> Put(UserInputModel model)
         {
-            this._logger.LogInformation("Test string for put - upgrade");
-            return Ok();
+            var user = this.userService.GetById(model.Id);
+            if (user == null)
+            {
+                return this.NotFound();
+            }
+            user.FirstName = model.FirstName;
+            user.LastName = model.LastName;
+            user.Email = model.Email;
+            user.Password = model.Password;
+            user.Age = model.Age;
+            user.Gender = model.Gender;
+
+            await this.userService.Update(user);
+            return this.Ok();
         }
 
         [HttpDelete("{id}")]

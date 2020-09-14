@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainMe.Data", "Data\TrainM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainMe.Data.Models", "Data\TrainMe.Data.Models\TrainMe.Data.Models.csproj", "{6E7F91BA-E674-428C-B5FD-D44BE32A5F8D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainMe.Console", "TrainMe.Console\TrainMe.Console.csproj", "{BDE5C4D3-AF7A-4C7D-BB08-00C16FAA3155}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainMe.Common", "TrainMe.Common\TrainMe.Common.csproj", "{EF3BDFA5-CE55-4905-8B79-BB7800C16F0F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainMe.Data.Common", "Data\TrainMe.Data.Common\TrainMe.Data.Common.csproj", "{90D94B9E-BDD6-4FCD-BDAA-23684DF89965}"

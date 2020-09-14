@@ -82,12 +82,24 @@ namespace TrainMe.WebAPI.Controllers
             return Ok();
         }
 
-       [HttpPut]
-        public ActionResult Put()
+
+        [HttpPut]
+        public async Task<ActionResult> Put(ResourceInputModel model)
         {
-            this._logger.LogInformation("Test string for put - upgrade");
-            return Ok();
+            var resource = this.resourceService.GetById(model.Id);
+            if (resource == null)
+            {
+                return this.NotFound();
+            }
+            resource.Name = model.Name;
+            resource.Type = model.Type;
+            resource.Link = model.Link;
+            resource.Description = model.Description;
+
+            await this.resourceService.Update(resource);
+            return this.Ok();
         }
+
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)

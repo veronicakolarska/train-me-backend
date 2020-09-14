@@ -87,10 +87,22 @@ namespace TrainMe.WebAPI.Controllers
         }
 
         [HttpPut]
-        public ActionResult Put()
+        public async Task<ActionResult> Put(ExerciseInputModel model)
         {
-            this._logger.LogInformation("Test string for put - upgrade");
-            return Ok();
+            var exercise = this.exerciseService.GetById(model.Id);
+            if (exercise == null)
+            {
+                return this.NotFound();
+            }
+            exercise.Name = model.Name;
+            exercise.ProgramId = model.ProgramId;
+            exercise.SeriesDefault = model.SeriesDefault;
+            exercise.RepetitionsDefault = model.RepetitionsDefault;
+            exercise.TempoDefault = model.TempoDefault;
+            exercise.BreakDefault = model.BreakDefault;
+
+            await this.exerciseService.Update(exercise);
+            return this.Ok();
         }
 
 

@@ -37,7 +37,7 @@ namespace TrainMe.Services.Data
 
         public User GetById(int id)
         {
-            return this.GetAll().First((x) => x.Id == id);
+            return this.GetAll().FirstOrDefault((x) => x.Id == id);
         }
 
         public async Task Delete(int id)

@@ -23,10 +23,8 @@
 
         public DbSet<ExerciseResource> ExerciseResources { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(@"Server=.;Database=TrainMe;User Id=sa;Password=123456!!XX;");
-        }
+        public TrainMeContext(DbContextOptions<TrainMeContext> options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
