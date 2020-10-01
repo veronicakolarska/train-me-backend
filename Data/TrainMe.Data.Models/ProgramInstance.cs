@@ -8,7 +8,7 @@ namespace TrainMe.Data.Models
     {
         public ProgramInstance()
         {
-            this.ExerciseInstances = new HashSet<ExerciseInstance>();
+            this.ExerciseInstancesInProgramInstance = new HashSet<ExerciseInstanceInProgramInstance>();
         }
 
         [Key]
@@ -22,6 +22,6 @@ namespace TrainMe.Data.Models
 
         public User User { get; set; }
 
-        public ICollection<ExerciseInstance> ExerciseInstances { get; set; }
+        public ICollection<ExerciseInstanceInProgramInstance> ExerciseInstancesInProgramInstance { get; set; }
     }
 }

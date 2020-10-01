@@ -13,15 +13,22 @@ namespace TrainMe.Services.Data
         private readonly IRepository<User> userRepository;
         private readonly IRepository<ProgramInstance> programInstanceRepository;
 
+        private readonly IRepository<ExerciseInstance> exerciseInstanceRepository;
+        private readonly IRepository<ExerciseInstanceInProgramInstance> exerciseInstanceInProgramInstanceRepository;
+
         public ProgramInstanceService(
             IRepository<Program> programRepository,
             IRepository<User> userRepository,
-            IRepository<ProgramInstance> programInstanceRepository
+            IRepository<ProgramInstance> programInstanceRepository,
+            IRepository<ExerciseInstance> exerciseInstanceRepository,
+            IRepository<ExerciseInstanceInProgramInstance> exerciseInstanceInProgramInstanceRepository
         )
         {
             this.programRepository = programRepository;
             this.userRepository = userRepository;
             this.programInstanceRepository = programInstanceRepository;
+            this.exerciseInstanceRepository = exerciseInstanceRepository;
+            this.exerciseInstanceInProgramInstanceRepository = exerciseInstanceInProgramInstanceRepository;
         }
 
         public async Task Create(ProgramInstance programInstance)
@@ -55,8 +62,9 @@ namespace TrainMe.Services.Data
                 throw new ArgumentException("Program does not exist in the database.");
             }
 
+            var allExerciseForProgram = program.ExercisesInProgram.Select((x) => x.Exercise);
 
-            var newExerciseInstances = program.Exercises.Select((x) => new ExerciseInstance()
+            var newExerciseInstances = allExerciseForProgram.Select((x) => new ExerciseInstance()
             {
                 ExerciseId = x.Id,
                 Tempo = x.TempoDefault,
@@ -68,8 +76,14 @@ namespace TrainMe.Services.Data
             {
                 UserId = user.Id,
                 ProgramId = program.Id,
-                ExerciseInstances = newExerciseInstances,
             };
+
+            var allExerciseInstancesInProgramInstaces = newExerciseInstances.Select((x) => new ExerciseInstanceInProgramInstance {
+                ProgramInstance = newProgramInstance,
+                ExerciseInstance = x
+            }).ToList();
+
+            newProgramInstance.ExerciseInstancesInProgramInstance = allExerciseInstancesInProgramInstaces;
 
             await this.programInstanceRepository.AddAsync(newProgramInstance);
             await this.programInstanceRepository.SaveChangesAsync();

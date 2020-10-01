@@ -60,6 +60,27 @@ namespace TrainMe.Data.Migrations
                     b.ToTable("Exercises");
                 });
 
+            modelBuilder.Entity("TrainMe.Data.Models.ExerciseInProgram", b =>
+                {
+                    b.Property<int>("ExerciseId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProgramId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("ExerciseId", "ProgramId");
+
+                    b.HasIndex("ProgramId");
+
+                    b.ToTable("ExercisesInPrograms");
+                });
+
             modelBuilder.Entity("TrainMe.Data.Models.ExerciseInstance", b =>
                 {
                     b.Property<int>("Id")
@@ -99,6 +120,27 @@ namespace TrainMe.Data.Migrations
                     b.HasIndex("ProgramInstanceId");
 
                     b.ToTable("ExerciseInstances");
+                });
+
+            modelBuilder.Entity("TrainMe.Data.Models.ExerciseInstanceInProgramInstance", b =>
+                {
+                    b.Property<int>("ExerciseInstanceId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProgramInstanceId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("ExerciseInstanceId", "ProgramInstanceId");
+
+                    b.HasIndex("ProgramInstanceId");
+
+                    b.ToTable("ExerciseInstancesInProgramInstances");
                 });
 
             modelBuilder.Entity("TrainMe.Data.Models.ExerciseResource", b =>
@@ -263,7 +305,22 @@ namespace TrainMe.Data.Migrations
             modelBuilder.Entity("TrainMe.Data.Models.Exercise", b =>
                 {
                     b.HasOne("TrainMe.Data.Models.Program", "Program")
-                        .WithMany("Exercises")
+                        .WithMany()
+                        .HasForeignKey("ProgramId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("TrainMe.Data.Models.ExerciseInProgram", b =>
+                {
+                    b.HasOne("TrainMe.Data.Models.Exercise", "Exercise")
+                        .WithMany("ExercisesInProgram")
+                        .HasForeignKey("ExerciseId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("TrainMe.Data.Models.Program", "Program")
+                        .WithMany("ExercisesInProgram")
                         .HasForeignKey("ProgramId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -278,7 +335,22 @@ namespace TrainMe.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("TrainMe.Data.Models.ProgramInstance", "ProgramInstance")
-                        .WithMany("ExerciseInstances")
+                        .WithMany()
+                        .HasForeignKey("ProgramInstanceId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("TrainMe.Data.Models.ExerciseInstanceInProgramInstance", b =>
+                {
+                    b.HasOne("TrainMe.Data.Models.ExerciseInstance", "ExerciseInstance")
+                        .WithMany("ExerciseInstancesInProgramInstance")
+                        .HasForeignKey("ExerciseInstanceId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("TrainMe.Data.Models.ProgramInstance", "ProgramInstance")
+                        .WithMany("ExerciseInstancesInProgramInstance")
                         .HasForeignKey("ProgramInstanceId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();

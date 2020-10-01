@@ -1,4 +1,4 @@
-namespace TrainMe.Data
+namespace TrainMe.Data.EntityConfig
 {
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;

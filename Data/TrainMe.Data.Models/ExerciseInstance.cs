@@ -8,6 +8,11 @@ namespace TrainMe.Data.Models
 
     public class ExerciseInstance : AuditableEntity
     {
+        public ExerciseInstance()
+        {
+            this.ExerciseInstancesInProgramInstance = new HashSet<ExerciseInstanceInProgramInstance>();
+        }
+
         [Key]
         public int Id { get; set; }
 
@@ -32,5 +37,7 @@ namespace TrainMe.Data.Models
 
         [Range(GlobalConstants.ExerciseBreakMin, GlobalConstants.ExerciseBreakMax)]
         public int Break { get; set; }
+
+        public ICollection<ExerciseInstanceInProgramInstance> ExerciseInstancesInProgramInstance { get; set; }
     }
 }

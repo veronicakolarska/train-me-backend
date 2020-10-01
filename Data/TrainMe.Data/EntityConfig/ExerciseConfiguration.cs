@@ -1,4 +1,4 @@
-namespace TrainMe.Data
+namespace TrainMe.Data.EntityConfig
 {
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -10,6 +10,11 @@ namespace TrainMe.Data
         {
             builder
                 .HasMany(x => x.ExerciseResources)
+                .WithOne(x => x.Exercise)
+                .HasForeignKey(x => x.ExerciseId);
+
+            builder
+                .HasMany(x => x.ExercisesInProgram)
                 .WithOne(x => x.Exercise)
                 .HasForeignKey(x => x.ExerciseId);
         }

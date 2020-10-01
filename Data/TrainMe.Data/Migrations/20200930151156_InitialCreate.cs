@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TrainMe.Data.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -149,6 +149,32 @@ namespace TrainMe.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ExercisesInPrograms",
+                columns: table => new
+                {
+                    ExerciseId = table.Column<int>(nullable: false),
+                    ProgramId = table.Column<int>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ExercisesInPrograms", x => new { x.ExerciseId, x.ProgramId });
+                    table.ForeignKey(
+                        name: "FK_ExercisesInPrograms_Exercises_ExerciseId",
+                        column: x => x.ExerciseId,
+                        principalTable: "Exercises",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ExercisesInPrograms_Programs_ProgramId",
+                        column: x => x.ProgramId,
+                        principalTable: "Programs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ExerciseInstances",
                 columns: table => new
                 {
@@ -180,6 +206,32 @@ namespace TrainMe.Data.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "ExerciseInstancesInProgramInstances",
+                columns: table => new
+                {
+                    ExerciseInstanceId = table.Column<int>(nullable: false),
+                    ProgramInstanceId = table.Column<int>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ExerciseInstancesInProgramInstances", x => new { x.ExerciseInstanceId, x.ProgramInstanceId });
+                    table.ForeignKey(
+                        name: "FK_ExerciseInstancesInProgramInstances_ExerciseInstances_ExerciseInstanceId",
+                        column: x => x.ExerciseInstanceId,
+                        principalTable: "ExerciseInstances",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ExerciseInstancesInProgramInstances_ProgramInstances_ProgramInstanceId",
+                        column: x => x.ProgramInstanceId,
+                        principalTable: "ProgramInstances",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_ExerciseInstances_ExerciseId",
                 table: "ExerciseInstances",
@@ -191,6 +243,11 @@ namespace TrainMe.Data.Migrations
                 column: "ProgramInstanceId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ExerciseInstancesInProgramInstances_ProgramInstanceId",
+                table: "ExerciseInstancesInProgramInstances",
+                column: "ProgramInstanceId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ExerciseResources_ResourceId",
                 table: "ExerciseResources",
                 column: "ResourceId");
@@ -198,6 +255,11 @@ namespace TrainMe.Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Exercises_ProgramId",
                 table: "Exercises",
+                column: "ProgramId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ExercisesInPrograms_ProgramId",
+                table: "ExercisesInPrograms",
                 column: "ProgramId");
 
             migrationBuilder.CreateIndex(
@@ -219,19 +281,25 @@ namespace TrainMe.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ExerciseInstances");
+                name: "ExerciseInstancesInProgramInstances");
 
             migrationBuilder.DropTable(
                 name: "ExerciseResources");
 
             migrationBuilder.DropTable(
-                name: "ProgramInstances");
+                name: "ExercisesInPrograms");
+
+            migrationBuilder.DropTable(
+                name: "ExerciseInstances");
+
+            migrationBuilder.DropTable(
+                name: "Resources");
 
             migrationBuilder.DropTable(
                 name: "Exercises");
 
             migrationBuilder.DropTable(
-                name: "Resources");
+                name: "ProgramInstances");
 
             migrationBuilder.DropTable(
                 name: "Programs");

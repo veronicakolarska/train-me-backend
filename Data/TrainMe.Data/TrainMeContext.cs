@@ -6,6 +6,7 @@
     using Microsoft.EntityFrameworkCore;
     using TrainMe.Data.Models;
     using System.Linq;
+    using TrainMe.Data.EntityConfig;
 
     public class TrainMeContext : DbContext
     {
@@ -23,6 +24,10 @@
 
         public DbSet<ExerciseResource> ExerciseResources { get; set; }
 
+        public DbSet<ExerciseInProgram> ExercisesInPrograms { get; set; }
+
+        public DbSet<ExerciseInstanceInProgramInstance> ExerciseInstancesInProgramInstances { get; set; }
+
         public TrainMeContext() { }
 
         public TrainMeContext(DbContextOptions<TrainMeContext> options)
@@ -36,6 +41,8 @@
             modelBuilder.ApplyConfiguration(new ResourceConfiguration());
             modelBuilder.ApplyConfiguration(new ProgramInstanceConfiguration());
             modelBuilder.ApplyConfiguration(new ExerciseResourceConfiguration());
+            modelBuilder.ApplyConfiguration(new ExerciseInProgramConfiguration());
+            modelBuilder.ApplyConfiguration(new ExerciseInstanceInProgramInstanceConfiguration());
 
             var entityTypes = modelBuilder.Model.GetEntityTypes().ToList();
 
