@@ -72,14 +72,6 @@ namespace TrainMe.WebAPI.Controllers
             return Ok();
         }
 
-        [HttpPut]
-        public ActionResult Put()
-        {
-            this._logger.LogInformation("Test string for put - upgrade");
-            return Ok();
-        }
-
-
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
