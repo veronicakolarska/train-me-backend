@@ -11,5 +11,7 @@ namespace TrainMe.WebAPI.Models
         public string Description { get; set; }
 
         public int CreatorId { get; set; }
+
+        public Uri Picture { get; set; }
     }
 }

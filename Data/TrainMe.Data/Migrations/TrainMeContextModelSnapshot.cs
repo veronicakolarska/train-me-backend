@@ -189,6 +189,9 @@ namespace TrainMe.Data.Migrations
                         .HasColumnType("nvarchar(40)")
                         .HasMaxLength(40);
 
+                    b.Property<string>("Picture")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CreatorId");

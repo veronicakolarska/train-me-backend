@@ -27,6 +27,8 @@ namespace TrainMe.Data.Models
 
         public User Creator { get; set; }
 
+        public Uri Picture { get; set; }
+
         public ICollection<ProgramInstance> ProgramInstances { get; set; }
 
         public ICollection<ExerciseInProgram> ExercisesInProgram { get; set; }

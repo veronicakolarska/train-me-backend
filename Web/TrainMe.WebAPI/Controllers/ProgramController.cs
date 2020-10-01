@@ -34,6 +34,7 @@ namespace TrainMe.WebAPI.Controllers
                 Name = x.Name,
                 Description = x.Description,
                 CreatorId = x.CreatorId,
+                Picture = x.Picture,
                 CreatedOn = x.CreatedOn,
                 ModifiedOn = x.ModifiedOn
             });
@@ -55,6 +56,7 @@ namespace TrainMe.WebAPI.Controllers
                 Name = result.Name,
                 Description = result.Description,
                 CreatorId = result.CreatorId,
+                Picture = result.Picture,
                 CreatedOn = result.CreatedOn,
                 ModifiedOn = result.ModifiedOn
             };
@@ -69,6 +71,7 @@ namespace TrainMe.WebAPI.Controllers
                 Name = model.Name,
                 Description = model.Description,
                 CreatorId = model.CreatorId,
+                Picture = model.Picture
             };
             await this.programService.Create(program);
             return Ok();
@@ -86,6 +89,7 @@ namespace TrainMe.WebAPI.Controllers
             program.Name = model.Name;
             program.Description = model.Description;
             program.CreatorId = model.CreatorId;
+            program.Picture = model.Picture;
 
             await this.programService.Update(program);
             return this.Ok();

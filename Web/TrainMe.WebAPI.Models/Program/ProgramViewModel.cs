@@ -12,6 +12,8 @@ namespace TrainMe.WebAPI.Models
 
         public int CreatorId { get; set; }
 
+        public Uri Picture { get; set; }
+
         public DateTime CreatedOn { get; set; }
 
         public DateTime? ModifiedOn { get; set; }
