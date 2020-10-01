@@ -5,7 +5,6 @@ namespace TrainMe.WebAPI.Models
 
     public class ResourceInputModel
     {
-        [Key]
         public int Id { get; set; }
 
         [Required]

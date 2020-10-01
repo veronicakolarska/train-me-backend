@@ -4,7 +4,6 @@ namespace TrainMe.WebAPI.Models
 
     public class ExerciseInstanceInProgramInstanceInputModel
     {
-        [Key]
         public int Id { get; set; }
 
         public int ExerciseInstanceId { get; set; }
