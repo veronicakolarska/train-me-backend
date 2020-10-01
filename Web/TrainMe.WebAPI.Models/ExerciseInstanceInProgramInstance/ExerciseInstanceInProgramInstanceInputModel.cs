@@ -1,9 +1,10 @@
-using System;
-
 namespace TrainMe.WebAPI.Models
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class ExerciseInstanceInProgramInstanceInputModel
     {
+        [Key]
         public int Id { get; set; }
 
         public int ExerciseInstanceId { get; set; }
