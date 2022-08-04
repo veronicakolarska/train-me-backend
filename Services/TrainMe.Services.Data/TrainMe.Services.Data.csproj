@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Data\TrainMe.Data.Models\TrainMe.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Data\TrainMe.Data\TrainMe.Data.csproj" />
+    <ProjectReference Include="..\..\Data\TrainMe.Data.Common\TrainMe.Data.Common.csproj" />
+    <ProjectReference Include="..\..\Web\TrainMe.WebAPI.Models\TrainMe.WebAPI.Models.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+      <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+</Project>
