@@ -2,6 +2,6 @@ language: csharp
 mono: none
 dotnet: 6
 install:
-- dotnet restore
+ - dotnet restore
 script:
  - dotnet build
