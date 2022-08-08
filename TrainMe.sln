@@ -1,29 +1,42 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{868A182F-F56C-4E2B-B683-D23C6F7ABAE2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainMe.Data", "Data\TrainMe.Data\TrainMe.Data.csproj", "{1FCBD0CD-8F80-4ADD-BE7C-E9090CB0AF28}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainMe.Data", "Data\TrainMe.Data\TrainMe.Data.csproj", "{1FCBD0CD-8F80-4ADD-BE7C-E9090CB0AF28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainMe.Data.Models", "Data\TrainMe.Data.Models\TrainMe.Data.Models.csproj", "{6E7F91BA-E674-428C-B5FD-D44BE32A5F8D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainMe.Data.Models", "Data\TrainMe.Data.Models\TrainMe.Data.Models.csproj", "{6E7F91BA-E674-428C-B5FD-D44BE32A5F8D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainMe.Common", "TrainMe.Common\TrainMe.Common.csproj", "{EF3BDFA5-CE55-4905-8B79-BB7800C16F0F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainMe.Common", "TrainMe.Common\TrainMe.Common.csproj", "{EF3BDFA5-CE55-4905-8B79-BB7800C16F0F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainMe.Data.Common", "Data\TrainMe.Data.Common\TrainMe.Data.Common.csproj", "{90D94B9E-BDD6-4FCD-BDAA-23684DF89965}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainMe.Data.Common", "Data\TrainMe.Data.Common\TrainMe.Data.Common.csproj", "{90D94B9E-BDD6-4FCD-BDAA-23684DF89965}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{71350405-D704-461F-8A21-C07DDC683639}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainMe.Services.Data", "Services\TrainMe.Services.Data\TrainMe.Services.Data.csproj", "{D92C7E21-2C55-4808-96EF-E8CCEA0337C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainMe.Services.Data", "Services\TrainMe.Services.Data\TrainMe.Services.Data.csproj", "{D92C7E21-2C55-4808-96EF-E8CCEA0337C6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{31D1C4F1-1FB1-48F8-B6D1-7AC1127E160C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainMe.WebAPI", "Web\TrainMe.WebAPI\TrainMe.WebAPI.csproj", "{591A7E7C-9BBA-48B4-883A-D499344A81B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainMe.WebAPI", "Web\TrainMe.WebAPI\TrainMe.WebAPI.csproj", "{591A7E7C-9BBA-48B4-883A-D499344A81B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainMe.WebAPI.Models", "Web\TrainMe.WebAPI.Models\TrainMe.WebAPI.Models.csproj", "{0F2CB1CC-B88A-4BF4-BCDA-460828105087}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainMe.WebAPI.Models", "Web\TrainMe.WebAPI.Models\TrainMe.WebAPI.Models.csproj", "{0F2CB1CC-B88A-4BF4-BCDA-460828105087}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainMe.WebAPI.Tests", "Web\TrainMe.WebAPI.Tests\TrainMe.WebAPI.Tests.csproj", "{9399C312-74EE-489D-BB5D-D50DD594C9ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainMe.WebAPI.Tests", "Web\TrainMe.WebAPI.Tests\TrainMe.WebAPI.Tests.csproj", "{9399C312-74EE-489D-BB5D-D50DD594C9ED}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3C94758B-9B05-46C3-8D7F-1F011B7AAEB4}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		.markdownlint.json = .markdownlint.json
+		.travis.yml = .travis.yml
+		commitlint.config.js = commitlint.config.js
+		LICENSE = LICENSE
+		package-lock.json = package-lock.json
+		package.json = package.json
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,9 +46,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{1FCBD0CD-8F80-4ADD-BE7C-E9090CB0AF28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -62,18 +72,6 @@ Global
 		{6E7F91BA-E674-428C-B5FD-D44BE32A5F8D}.Release|x64.Build.0 = Release|Any CPU
 		{6E7F91BA-E674-428C-B5FD-D44BE32A5F8D}.Release|x86.ActiveCfg = Release|Any CPU
 		{6E7F91BA-E674-428C-B5FD-D44BE32A5F8D}.Release|x86.Build.0 = Release|Any CPU
-		{BDE5C4D3-AF7A-4C7D-BB08-00C16FAA3155}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BDE5C4D3-AF7A-4C7D-BB08-00C16FAA3155}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BDE5C4D3-AF7A-4C7D-BB08-00C16FAA3155}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{BDE5C4D3-AF7A-4C7D-BB08-00C16FAA3155}.Debug|x64.Build.0 = Debug|Any CPU
-		{BDE5C4D3-AF7A-4C7D-BB08-00C16FAA3155}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{BDE5C4D3-AF7A-4C7D-BB08-00C16FAA3155}.Debug|x86.Build.0 = Debug|Any CPU
-		{BDE5C4D3-AF7A-4C7D-BB08-00C16FAA3155}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BDE5C4D3-AF7A-4C7D-BB08-00C16FAA3155}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BDE5C4D3-AF7A-4C7D-BB08-00C16FAA3155}.Release|x64.ActiveCfg = Release|Any CPU
-		{BDE5C4D3-AF7A-4C7D-BB08-00C16FAA3155}.Release|x64.Build.0 = Release|Any CPU
-		{BDE5C4D3-AF7A-4C7D-BB08-00C16FAA3155}.Release|x86.ActiveCfg = Release|Any CPU
-		{BDE5C4D3-AF7A-4C7D-BB08-00C16FAA3155}.Release|x86.Build.0 = Release|Any CPU
 		{EF3BDFA5-CE55-4905-8B79-BB7800C16F0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EF3BDFA5-CE55-4905-8B79-BB7800C16F0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF3BDFA5-CE55-4905-8B79-BB7800C16F0F}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -147,6 +145,9 @@ Global
 		{9399C312-74EE-489D-BB5D-D50DD594C9ED}.Release|x86.ActiveCfg = Release|Any CPU
 		{9399C312-74EE-489D-BB5D-D50DD594C9ED}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1FCBD0CD-8F80-4ADD-BE7C-E9090CB0AF28} = {868A182F-F56C-4E2B-B683-D23C6F7ABAE2}
 		{6E7F91BA-E674-428C-B5FD-D44BE32A5F8D} = {868A182F-F56C-4E2B-B683-D23C6F7ABAE2}
@@ -155,5 +156,8 @@ Global
 		{591A7E7C-9BBA-48B4-883A-D499344A81B1} = {31D1C4F1-1FB1-48F8-B6D1-7AC1127E160C}
 		{0F2CB1CC-B88A-4BF4-BCDA-460828105087} = {31D1C4F1-1FB1-48F8-B6D1-7AC1127E160C}
 		{9399C312-74EE-489D-BB5D-D50DD594C9ED} = {31D1C4F1-1FB1-48F8-B6D1-7AC1127E160C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6F690A73-7E66-46C3-99C9-CC952983B381}
 	EndGlobalSection
 EndGlobal
