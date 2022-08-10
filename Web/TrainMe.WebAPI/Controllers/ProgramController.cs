@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using TrainMe.Common.Extensions;
 using TrainMe.Services.Data;
 using TrainMe.WebAPI.Models;
 
@@ -40,7 +41,7 @@ namespace TrainMe.WebAPI.Controllers
                 Picture = x.Picture,
                 CreatedOn = x.CreatedOn,
                 ModifiedOn = x.ModifiedOn,
-                IsUserEnrolled = this.User.Identity.IsAuthenticated ? x.ProgramInstances.Any((inst) => inst.User.ExternalId == this.User.Identity.Name) : false
+                IsUserEnrolled = this.User.IsAuthenticated() && x.ProgramInstances.Any((inst) => inst.User.ExternalId == this.User.GetExternalId())
             });
         }
 
@@ -70,6 +71,7 @@ namespace TrainMe.WebAPI.Controllers
             {
                 return this.NotFound();
             }
+
             var result = programService.GetById(id);
 
             var programViewModel = new ProgramViewModel
@@ -82,7 +84,29 @@ namespace TrainMe.WebAPI.Controllers
                 Duration = result.WorkoutDays.Count,
                 Picture = result.Picture,
                 CreatedOn = result.CreatedOn,
-                ModifiedOn = result.ModifiedOn
+                ModifiedOn = result.ModifiedOn,
+                Workdays = result.WorkoutDays.Select(x => new WorkdayViewModel
+                {
+                    Id = x.Id,
+                    IsRestDay = x.IsRestDay,
+                    Order = x.Order,
+                    ProgramId = x.ProgramId,
+                    CreatedOn = x.CreatedOn,
+                    ModifiedOn = x.ModifiedOn,
+                    Exercises = x.ExercisesInWorkoutDay
+                        .Select(y => y.Exercise)
+                        .Select(y => new ExerciseViewModel
+                        {
+                            BreakDefault = y.BreakDefault,
+                            CreatedOn = y.CreatedOn,
+                            Id = y.Id,
+                            ModifiedOn= y.ModifiedOn,
+                            Name = y.Name,
+                            RepetitionsDefault = y.RepetitionsDefault,
+                            SeriesDefault = y.SeriesDefault,
+                            TempoDefault = y.TempoDefault,
+                        })
+                }).OrderBy(x => x.Order)
             };
             return this.Ok(programViewModel);
         }

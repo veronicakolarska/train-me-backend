@@ -2,7 +2,7 @@ using System;
 
 namespace TrainMe.WebAPI.Models
 {
-    public class ExerciseInstanceViewModel
+    public class ExerciseInstanceViewModel : BaseViewModel
     {
         public int Id { get; set; }
 
@@ -15,9 +15,5 @@ namespace TrainMe.WebAPI.Models
         public string Tempo { get; set; }
 
         public int Break { get; set; }
-
-        public DateTime CreatedOn { get; set; }
-
-        public DateTime? ModifiedOn { get; set; }
     }
 }

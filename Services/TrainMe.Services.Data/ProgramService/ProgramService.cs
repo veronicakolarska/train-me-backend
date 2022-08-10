@@ -73,7 +73,13 @@ namespace TrainMe.Services.Data
 
         public Program GetById(int id)
         {
-            return this.GetAll().FirstOrDefault((x) => x.Id == id);
+            return this.programRepository.All()
+                .Include(x => x.WorkoutDays)
+                .ThenInclude(x => x.ExercisesInWorkoutDay)
+                .ThenInclude(x => x.Exercise)
+                .ThenInclude(x => x.ExerciseResources)
+                .ThenInclude(x => x.Resource)
+                .FirstOrDefault((x) => x.Id == id);
         }
 
         public async Task Update(Program program)

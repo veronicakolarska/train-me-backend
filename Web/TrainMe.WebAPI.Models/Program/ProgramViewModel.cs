@@ -1,9 +1,10 @@
 using System;
+using System.Collections.Generic;
 using TrainMe.Data.Common.Enums;
 
 namespace TrainMe.WebAPI.Models
 {
-    public class ProgramViewModel
+    public class ProgramViewModel : BaseViewModel
     {
         public int Id { get; set; }
 
@@ -17,12 +18,10 @@ namespace TrainMe.WebAPI.Models
 
         public DifficultyLevel Difficulty { get; set; }
 
-        public DateTime CreatedOn { get; set; }
-
-        public DateTime? ModifiedOn { get; set; }
-
         public int Duration { get; set; }
 
         public bool IsUserEnrolled { get; set; }
+
+        public IEnumerable<WorkdayViewModel> Workdays { get; set; }
     }
 }

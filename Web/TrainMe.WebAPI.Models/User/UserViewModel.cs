@@ -3,7 +3,7 @@ using TrainMe.Common;
 
 namespace TrainMe.WebAPI.Models
 {
-    public class UserViewModel
+    public class UserViewModel : BaseViewModel
     {
         public int Id { get; set; }
 
@@ -18,9 +18,5 @@ namespace TrainMe.WebAPI.Models
         public int? Age { get; set; }
 
         public Gender Gender { get; set; }
-
-        public DateTime CreatedOn { get; set; }
-
-        public DateTime? ModifiedOn { get; set; }
     }
 }

@@ -3,7 +3,7 @@ using TrainMe.Common;
 
 namespace TrainMe.WebAPI.Models
 {
-    public class ResourceViewModel
+    public class ResourceViewModel : BaseViewModel
     {
         public int Id { get; set; }
 
@@ -14,9 +14,5 @@ namespace TrainMe.WebAPI.Models
         public string Link { get; set; }
 
         public string Description { get; set; }
-
-        public DateTime CreatedOn { get; set; }
-
-        public DateTime? ModifiedOn { get; set; }
     }
 }
