@@ -118,7 +118,7 @@ namespace TrainMe.Services.Data
             return this.programInstanceRepository.All().Any((x) => x.Id == id);
         }
 
-                public Task<bool> Exists(int programId, string externalUserId)
+        public Task<bool> Exists(int programId, string externalUserId)
         {
             return this.programInstanceRepository
                 .All()
@@ -133,7 +133,11 @@ namespace TrainMe.Services.Data
 
         public ProgramInstance GetById(int id)
         {
-            return this.GetAll().FirstOrDefault((x) => x.Id == id);
+            return this.programInstanceRepository.All()
+                .Include(x => x.WorkoutDayInstances)
+                .ThenInclude(x => x.ExerciseInstancesInWorkoutDayInstances)
+                .ThenInclude(x => x.ExerciseInstance)
+                .FirstOrDefault(x => x.Id == id);
         }
 
         public async Task Update(ProgramInstance programInstance)
