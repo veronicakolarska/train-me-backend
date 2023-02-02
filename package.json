@@ -16,14 +16,13 @@
     },
     "homepage": "https://github.com/veronicakolarska/train-me-backend#readme",
     "devDependencies": {
-        "@commitlint/cli": "17.0.3",
-        "@commitlint/config-conventional": "17.0.3",
-        "@strictr/markdown-lint-config": "1.3.5",
-        "commitizen": "4.2.5",
+        "@commitlint/cli": "17.4.2",
+        "@commitlint/config-conventional": "17.4.2",
+        "commitizen": "4.3.0",
         "cz-conventional-changelog": "3.3.0",
-        "husky": "8.0.1",
-        "markdownlint": "0.26.1",
-        "markdownlint-cli": "0.32.1"
+        "husky": "8.0.3",
+        "markdownlint": "0.27.0",
+        "markdownlint-cli": "0.33.0"
     },
     "config": {
         "commitizen": {
