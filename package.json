@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "A .net core backend project for the bachelor thesis.",
     "scripts": {
-        "lint:markdown": "markdownlint --ignore ./node_modules/ ."
+        "lint:markdown": "markdownlint **/*.md --ignore node_modules"
     },
     "repository": {
         "type": "git",
